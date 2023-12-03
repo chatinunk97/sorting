@@ -1,6 +1,14 @@
 import { Sorter } from "./Sorter";
 import { NumbersCollection } from "./NumbersCollection";
+import { CharacterCollection } from "./CharactersCollection";
+import { LinkedList } from "./LinkedList";
 const numberCollection = new NumbersCollection([10, 3, -5, 0]);
-const sorter = new Sorter(numberCollection);
+const characterCollection = new CharacterCollection("zavXc");
+const linkedList = new LinkedList();
+linkedList.add(200);
+linkedList.add(100);
+linkedList.add(400);
+linkedList.add(-23);
+const sorter = new Sorter(linkedList);
 sorter.sort();
-console.log(sorter.collection);
+linkedList.print();

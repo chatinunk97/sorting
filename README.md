@@ -23,6 +23,17 @@ tsc -w
 
 it will automatically compile the whole thing again
 
+# getter
+
+```
+  get length(): number {
+    return this.data.length;
+  }
+```
+
+This will enable us to use class.length without having to call it
+the length will be treated as a property. This is thanks to get
+
 # Nodemon + tsc -w
 
 Now we will use Nodemon with tsc -w
@@ -106,3 +117,53 @@ the list will go on forever
 - It must have a way to swap each value
 - It must have a way to compare 2 elements
 - It must be able to give an length
+
+```
+interface Sortable {
+  length: number;
+  compare(leftIndex: number, rightIndex: number): boolean;
+  swap(leftIndex: number, rightIndex: number): void;
+}
+```
+
+The power of interface is you can just add length compare swap
+and that's it you can implement your new data type to the sort function
+This is the key, you don't have to redefine how the sort is done or write again, this makes interface so handy
+In other word you are joining classes to 1 interface
+
+# Last Refactor
+
+Now we have Sorter working taking in string , string[],number[],LinkedList
+But we still have to create new Sorter() and pass in an argument
+Wouldn't it be bettwer if we can just like
+numberCollection.sort()
+
+This is where class extends comes in we can put the sort method in to every class
+
+Now we can use the sort to call compare and swap inside that class directly
+
+1. Frist we will remove the this.collection
+   since the collection is the class (numberCollection) itself , the class Sorter does not need that
+
+```
+  sort(): void {
+    const { length } = this;
+    for (let i = 0; i < length; i++) {
+      for (let j = 0; j < length - i - 1; j++) {
+        if (this.compare(j, j + 1)) {
+          this.swap(j, j + 1);
+        }
+      }
+    }
+  }
+```
+
+But TS will throw us an error since in Sorter class they cannot find a method name compare , swap
+
+This is the explanation, TS only see the scope in the class
+on the left but the reality is when the NumberCollection class is created there are swap and compare method in there
+![alt text](https://github.com/chatinunk97/sorting/blob/main/screenshot/ts_error.png?raw=true)
+
+This brings us to a new word
+
+# Absctract Class
