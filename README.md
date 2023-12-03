@@ -167,3 +167,57 @@ on the left but the reality is when the NumberCollection class is created there 
 This brings us to a new word
 
 # Absctract Class
+
+Summary : A parent class that cannot be used to created a new instance
+it can have a method / property that isn't implemented yet
+But the children that extend this class MUST promise to have those method / property
+
+This make it easier to reuse codes
+![alt text](https://github.com/chatinunk97/sorting/blob/main/screenshot/abstractclasses.png?raw=true)
+
+```
+export abstract class Sorter {
+
+  //abstract = telling TS that It will come in the future
+  abstract compare(leftIndex: number, rightIndex: number): boolean;
+  abstract swap(leftIndex: number, rightIndex: number): void;
+  //Rembmer getting is considered as a propety
+  abstract length : number;
+
+  sort(): void {
+    const { length } = this;
+    for (let i = 0; i < length; i++) {
+      for (let j = 0; j < length - i - 1; j++) {
+        if (this.compare(j, j + 1)) {
+          this.swap(j, j + 1);
+        }
+      }
+    }
+  }
+}
+```
+
+One point for the super() thing when using extends class
+
+```
+export class NumbersCollection extends Sorter {
+  constructor(public data: number[]) {
+    //We are running Sorter's constructor
+    super();
+  }
+}
+```
+
+the super is just in there to be sure if the parent class has an constructor we must call it to. Eventho for this Sorter class we don't have a constructor. TS just want us to call it that's all
+But if the child class doesnot have a constructor => no need to super()
+
+# Interface vs Abstract Class
+
+Interfaces => coupling object with the similar definitions
+but it's more loose
+
+Inheritance / Abstract classes => It's more about inheritance
+make it more strict to couple objects together
+Class will be useless / cannot exist if we remove this
+
+But thinking from a code reuse we think about interfaces first
