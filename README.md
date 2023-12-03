@@ -97,3 +97,10 @@ the list will go on forever
 
 3. Now the Sorter is kind of a place holder for different classes to come in and plugin their logic of how to compare and how to swap
    Doing so will enable us to plugin as many data types we have and it will still work ; If the logic is right of course
+
+4. Now we have to have an Interface to make it more general
+   So what will we need a class to be to be able to sort ?
+
+- It must have a way to swap each value
+- It must have a way to compare 2 elements
+- It must be able to give an length
