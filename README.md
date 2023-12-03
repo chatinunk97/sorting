@@ -87,6 +87,8 @@ the list will go on forever
 
 # The concept of refactor
 
+![alt text](https://github.com/chatinunk97/sorting/blob/main/screenshot/sort.png?raw=true)
+
 1. We are planning to implement Sorter for every type of data
    so that's the hard part comparing number[] , string , string[] are not the same
 2. So we create a seperated Class to handle the Comparing and swaping
